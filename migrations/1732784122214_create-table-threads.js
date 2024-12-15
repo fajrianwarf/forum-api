@@ -13,7 +13,7 @@ exports.up = (pgm) => {
       notNull: true,
     },
     date: {
-      type: 'TIMESTAMP',
+      type: 'TIMESTAMP WITH TIME ZONE',
       notNull: true,
     },
     owner: {

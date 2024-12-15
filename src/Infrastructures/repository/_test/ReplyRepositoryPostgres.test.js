@@ -42,7 +42,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: threadId,
+        threadId: threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -70,7 +70,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: threadId,
+        threadId: threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -97,7 +97,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: threadId,
+        threadId: threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -126,7 +126,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: threadId,
+        threadId: threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -153,7 +153,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: threadId,
+        threadId: threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -179,7 +179,7 @@ describe('ReplyRepositoryPostgres', () => {
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-123',
-        thread: 'thread-123',
+        threadId: 'thread-123',
         owner: 'user-123',
       });
     });
@@ -240,22 +240,22 @@ describe('ReplyRepositoryPostgres', () => {
       await CommentsTableTestHelper.addComment({
         id: commentId,
         content: 'sebuah comment',
-        date: '2024-12-13',
-        thread: threadId,
+        date: '2024-12-13T00:00:00.000Z',
+        threadId: threadId,
         owner: userId,
       });
 
       await RepliesTableTestHelper.addReply({
         id: 'reply-new',
         content: 'sebuah balasan baru',
-        date: '2024-12-14',
+        date: '2024-12-14T00:00:00.000Z',
         comment: commentId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
         id: 'reply-old',
         content: 'sebuah balasan lama',
-        date: '2024-12-12',
+        date: '2024-12-12T00:00:00.000Z',
         comment: commentId,
         owner: otherUserId,
       });
@@ -273,8 +273,10 @@ describe('ReplyRepositoryPostgres', () => {
       expect(replies[1].username).toBe('kepin');
       expect(replies[0].content).toBe('sebuah balasan lama');
       expect(replies[1].content).toBe('sebuah balasan baru');
-      expect(replies[0].date).toBeTruthy();
-      expect(replies[1].date).toBeTruthy();
+      expect(new Date(replies[0].date).toISOString()).toBe('2024-12-12T00:00:00.000Z');
+      expect(new Date(replies[1].date).toISOString()).toBe('2024-12-14T00:00:00.000Z');
+      expect(replies[0].is_delete).toBeFalsy();
+      expect(replies[1].is_delete).toBeFalsy();
     });
   });
 
@@ -292,15 +294,15 @@ describe('ReplyRepositoryPostgres', () => {
       await CommentsTableTestHelper.addComment({
         id: commentId,
         content: 'sebuah comment',
-        date: '2024-12-13',
-        thread: threadId,
+        date: '2024-12-13T00:00:00.000Z',
+        threadId: threadId,
         owner: userId,
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-2',
         content: 'sebuah comment',
-        date: '2024-12-13',
-        thread: threadId,
+        date: '2024-12-13T00:00:00.000Z',
+        threadId: threadId,
         owner: userId,
         isDelete: true,
       });
@@ -308,21 +310,21 @@ describe('ReplyRepositoryPostgres', () => {
       await RepliesTableTestHelper.addReply({
         id: 'reply-new',
         content: 'sebuah balasan baru',
-        date: '2024-12-14',
+        date: '2024-12-14T00:00:00.000Z',
         comment: commentId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
         id: 'reply-old',
         content: 'sebuah balasan lama',
-        date: '2024-12-12',
+        date: '2024-12-12T00:00:00.000Z',
         comment: commentId,
         owner: otherUserId,
       });
       await RepliesTableTestHelper.addReply({
         id: 'reply-old-2',
         content: 'sebuah balasan lama',
-        date: '2024-12-13',
+        date: '2024-12-13T00:00:00.000Z',
         comment: 'comment-2',
         owner: otherUserId,
       });
@@ -340,9 +342,11 @@ describe('ReplyRepositoryPostgres', () => {
       expect(replies[1].username).toBe('kepin');
       expect(replies[0].content).toBe('sebuah balasan lama');
       expect(replies[1].content).toBe('sebuah balasan baru');
-      expect(replies[0].date).toBeTruthy();
-      expect(replies[1].date).toBeTruthy();
+      expect(new Date(replies[0].date).toISOString()).toBe('2024-12-12T00:00:00.000Z');
+      expect(new Date(replies[1].date).toISOString()).toBe('2024-12-14T00:00:00.000Z');
       expect(replies[2]).toBeUndefined(); // reply in deleted comment
+      expect(replies[0].is_delete).toBeFalsy();
+      expect(replies[1].is_delete).toBeFalsy();
     });
   });
 
@@ -356,7 +360,7 @@ describe('ReplyRepositoryPostgres', () => {
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-123',
-        thread: 'thread-123',
+        threadId: 'thread-123',
         owner: 'user-123',
       });
 

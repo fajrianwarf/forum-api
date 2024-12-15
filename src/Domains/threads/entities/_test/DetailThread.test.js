@@ -15,17 +15,29 @@ describe('a DetailThread entities', () => {
 
   it('should throw error when payload does not meet data type specification', () => {
     // Arrange
-    const payload = {
-      id: 123,
-      title: 'sebuah thread',
-      body: 'sebuah body thread',
-      date: '2024-11-28T14:19:09.135Z',
-      username: 123,
-      comments: 'sebuah comment',
-    };
+    const testCases = [
+      {
+        id: 123,
+        title: 'sebuah thread',
+        body: 'sebuah body thread',
+        date: '2024-11-28T14:19:09.135Z',
+        username: 123,
+        comments: [],
+      },
+      {
+        id: '123',
+        title: 'sebuah thread',
+        body: 'sebuah body thread',
+        date: '2024-11-28T14:19:09.135Z',
+        username: 'kepin',
+        comments: 'sebuah comment',
+        }  
+    ];
 
     // Action & Assert
-    expect(() => new DetailThread(payload)).toThrowError('DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    testCases.forEach((test) => {
+      expect(() => new DetailThread(test)).toThrowError('DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    });
   });
 
   it('should create DetailThread object correctly', () => {

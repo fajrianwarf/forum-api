@@ -186,15 +186,15 @@ describe('CommentRepositoryPostgres', () => {
       await CommentsTableTestHelper.addComment({
         id: 'comment-new',
         content: 'sebuah comment baru',
-        date: '2024-12-14',
-        thread: threadId,
+        date: '2024-12-14T00:00:00.000Z',
+        threadId: threadId,
         owner: userId,
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-old',
         content: 'sebuah comment lama',
-        date: '2024-12-12',
-        thread: threadId,
+        date: '2024-12-12T00:00:00.000Z',
+        threadId: threadId,
         owner: otherUserId,
       });
 
@@ -211,8 +211,10 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[1].username).toBe('kepin');
       expect(comments[0].content).toBe('sebuah comment lama');
       expect(comments[1].content).toBe('sebuah comment baru');
-      expect(comments[0].date).toBeTruthy();
-      expect(comments[1].date).toBeTruthy();
+      expect(new Date(comments[0].date).toISOString()).toBe('2024-12-12T00:00:00.000Z');
+      expect(new Date(comments[1].date).toISOString()).toBe('2024-12-14T00:00:00.000Z');
+      expect(comments[0].is_delete).toBeFalsy();
+      expect(comments[1].is_delete).toBeFalsy();
     });
   });
 
@@ -230,7 +232,7 @@ describe('CommentRepositoryPostgres', () => {
 
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        thread: 'thread-123',
+        threadId: 'thread-123',
         owner: 'user-123',
       });
 

@@ -34,6 +34,8 @@ describe('CreateReply entities', () => {
 
     // Assert
     expect(newReply).toBeInstanceOf(CreateReply);
+    expect(newReply.owner).toEqual(payload.owner);
+    expect(newReply.commentId).toEqual(payload.commentId);
     expect(newReply.content).toEqual(payload.content);
   });
 });

@@ -31,7 +31,7 @@ describe('DetailReply entities', () => {
       id: 'reply-123',
       username: 'kepin',
       content: 'a reply',
-      date: '2024-12-12T08:00:00.000Z',
+      date: '2024-12-12T78:00:00.000Z',
     };
 
     // Action
@@ -43,6 +43,7 @@ describe('DetailReply entities', () => {
     expect(replyDetail.username).toEqual(payload.username);
     expect(replyDetail.content).toEqual(payload.content);
     expect(replyDetail.date).toEqual(payload.date);
+    expect(replyDetail.is_delete).toBeFalsy();
   });
 
   it('should create deleted DetailReply entities correctly', () => {
@@ -51,7 +52,7 @@ describe('DetailReply entities', () => {
       id: 'reply-123',
       username: 'kepin',
       content: 'a reply',
-      date: '2024-12-12T08:00:00.000Z',
+      date: '2024-12-12T78:00:00.000Z',
       is_delete: true,
     };
 

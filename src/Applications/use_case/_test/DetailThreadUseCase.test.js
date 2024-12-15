@@ -108,7 +108,6 @@ describe('DetailThreadUseCase', () => {
               content: '**balasan telah dihapus**',
             }),
           ],
-          likeCount: 2,
         }),
         new DetailComment({
           id: 'comment-2',
@@ -116,7 +115,6 @@ describe('DetailThreadUseCase', () => {
           date: '2024-12-13T00:00:00.000Z',
           content: '**komentar telah dihapus**',
           replies: [],
-          likeCount: 3,
         }),
       ],
     }));

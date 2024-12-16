@@ -65,4 +65,34 @@ describe('a DetailComment entities', () => {
     expect(detailComment.content).toStrictEqual(payload.content);
     expect(detailComment.replies).toStrictEqual(payload.replies);
   });
+
+  it('should create deleted DetailComment object correctly', () => {
+    // Arrange
+    const payload = {
+      id: 'comment-123',
+      username: 'faj',
+      date: '2024-11-29T11:22:33.153Z',
+      content: 'sebuah comment',
+      is_delete: true,
+      replies: [
+        {
+          id: 'reply-123',
+          username: 'faj',
+          date: '2024-11-29T13:12:33.153Z',
+          content: 'sebuah balasan',
+        }
+      ],
+    };
+
+    // Action
+    const detailComment = new DetailComment(payload);
+
+    // Assert
+    expect(detailComment).toBeInstanceOf(DetailComment);
+    expect(detailComment.id).toStrictEqual(payload.id);
+    expect(detailComment.username).toStrictEqual(payload.username);
+    expect(detailComment.date).toStrictEqual(payload.date);
+    expect(detailComment.content).toStrictEqual('**komentar telah dihapus**');
+    expect(detailComment.replies).toStrictEqual(payload.replies);
+  });
 });

@@ -18,20 +18,20 @@ describe('a DetailThread entities', () => {
     const testCases = [
       {
         id: 123,
-        title: 'sebuah thread',
-        body: 'sebuah body thread',
-        date: '2024-11-28T14:19:09.135Z',
+        title: 123,
+        body: 123,
+        date: 123,
         username: 123,
         comments: [],
       },
       {
-        id: '123',
+        id: 'thread-123',
         title: 'sebuah thread',
         body: 'sebuah body thread',
         date: '2024-11-28T14:19:09.135Z',
         username: 'kepin',
         comments: 'sebuah comment',
-        }  
+      }
     ];
 
     // Action & Assert

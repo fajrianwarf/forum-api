@@ -333,13 +333,15 @@ describe('ReplyRepositoryPostgres', () => {
 
       // Action
       const replies = await replyRepositoryPostgres.getRepliesByThreadId(threadId);
-
+      console.log('rep :',replies)
       // Assert
       expect(replies).toHaveLength(2);
       expect(replies[0].id).toBe('reply-old'); // older reply first
       expect(replies[1].id).toBe('reply-new');
       expect(replies[0].username).toBe('agus');
       expect(replies[1].username).toBe('kepin');
+      expect(replies[0].owner).toBe('user-456');
+      expect(replies[1].owner).toBe('user-123');
       expect(replies[0].content).toBe('sebuah balasan lama');
       expect(replies[1].content).toBe('sebuah balasan baru');
       expect(new Date(replies[0].date).toISOString()).toBe('2024-12-12T00:00:00.000Z');

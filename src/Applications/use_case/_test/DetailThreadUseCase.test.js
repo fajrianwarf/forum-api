@@ -14,7 +14,7 @@ describe('DetailThreadUseCase', () => {
       title: 'sebuah thread',
       body: 'sebuah body thread',
       date: '2024-12-12T00:00:00.000Z',
-      username: 'user-123',
+      username: 'agus',
     };
 
     const mockComments = [
@@ -27,7 +27,7 @@ describe('DetailThreadUseCase', () => {
       },
       {
         id: 'comment-2',
-        username: 'user-123',
+        username: 'agus',
         date: '2024-12-13T00:00:00.000Z',
         content: 'sebuah deleted comment',
         is_delete: true,
@@ -41,22 +41,25 @@ describe('DetailThreadUseCase', () => {
         date: '2024-12-13T00:00:00.000Z',
         content: 'sebuah balasan',
         comment: 'comment-1',
+        owner: 'user-123',
         is_delete: false,
       },
       {
         id: 'reply-2',
-        username: 'user-123',
+        username: 'agus',
         date: '2024-12-14T00:00:00.000Z',
         content: 'a deleted reply',
         comment: 'comment-1',
+        owner: 'user-456',
         is_delete: true,
       },
       {
         id: 'reply-3',
-        username: 'user-123',
+        username: 'agus',
         date: '2024-12-14T00:00:00.000Z',
         content: 'sebuah balasan',
         comment: 'comment-2',
+        owner: 'user-456',
         is_delete: false,
       },
     ];
@@ -87,7 +90,7 @@ describe('DetailThreadUseCase', () => {
       title: 'sebuah thread',
       body: 'sebuah body thread',
       date: '2024-12-12T00:00:00.000Z',
-      username: 'user-123',
+      username: 'agus',
       comments: [
         new DetailComment({
           id: 'comment-1',
@@ -103,7 +106,7 @@ describe('DetailThreadUseCase', () => {
             }),
             new DetailReply({
               id: 'reply-2',
-              username: 'user-123',
+              username: 'agus',
               date: '2024-12-14T00:00:00.000Z',
               content: '**balasan telah dihapus**',
             }),
@@ -111,7 +114,7 @@ describe('DetailThreadUseCase', () => {
         }),
         new DetailComment({
           id: 'comment-2',
-          username: 'user-123',
+          username: 'agus',
           date: '2024-12-13T00:00:00.000Z',
           content: '**komentar telah dihapus**',
           replies: [],

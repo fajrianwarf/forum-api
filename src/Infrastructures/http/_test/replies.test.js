@@ -225,7 +225,7 @@ describe('replies endpoint', () => {
   describe('when DELETE /threads/{threadId}/comments/{commentId}/replies/{replyId}', () => {
     const dummyReply = {
       id: 'reply-123',
-      content: 'A new reply',
+      content: 'sebuah balasan',
       date: new Date().toISOString(),
       comment: dummyComment.id,
       isDelete: false,

@@ -1,0 +1,41 @@
+name: Continuous Integration
+ 
+on: 
+  pull_request:
+    branches:
+      - master
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+ 
+    strategy:
+      matrix:
+        node-version: ['18.x']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install migrate and test
+      run: |
+        npm install
+        npm run migrate up
+        npm run test
+      env:
+        CI: true
+        PGHOST: ${{ SECRETS.PGHOST }}
+        PGUSER: ${{ SECRETS.PGUSER }}
+        PGDATABASE: ${{ SECRETS.PGDATABASE }}
+        PGPASSWORD: ${{ SECRETS.PGPASSWORD }}
+        PGPORT: ${{ SECRETS.PGPORT }}
+        PGHOST_TEST: ${{ SECRETS.PGHOST_TEST }}
+        PGUSER_TEST: ${{ SECRETS.PGUSER_TEST }}
+        PGDATABASE_TEST: ${{ SECRETS.PGDATABASE_TEST }}
+        PGPASSWORD_TEST: ${{ SECRETS.PGPASSWORD_TEST }}
+        PGPORT_TEST: ${{ SECRETS.PGPORT_TEST }}
+        ACCESS_TOKEN_KEY: ${{ SECRETS.ACCESS_TOKEN_KEY }}
+        REFRESH_TOKEN_KEY: ${{ SECRETS.REFRESH_TOKEN_KEY }}
+        ACCESS_TOKEN_AGE: ${{ SECRETS.ACCESS_TOKEN_AGE }}

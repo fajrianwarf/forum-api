@@ -17,9 +17,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: forumapi_test
+          PGUSER: postgres
+          PGPASSWORD: mysecretpassword
+          PGDATABASE: forumapi_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s

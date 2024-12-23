@@ -1,9 +1,8 @@
-const CommentRepository = require("../../../Domains/comments/CommentRepository");
-const CreateComment = require("../../../Domains/comments/entities/CreateComment");
-const CreatedComment = require("../../../Domains/comments/entities/CreatedComment");
-const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
-const AddCommentUseCase = require("../AddCommentUseCase");
-
+const CommentRepository = require('../../../Domains/comments/CommentRepository');
+const CreateComment = require('../../../Domains/comments/entities/CreateComment');
+const CreatedComment = require('../../../Domains/comments/entities/CreatedComment');
+const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
+const AddCommentUseCase = require('../AddCommentUseCase');
 
 describe('AddCommentUseCase', () => {
   it('should orchestrating the add comment action correctly', async () => {
@@ -36,7 +35,7 @@ describe('AddCommentUseCase', () => {
 
     // Action
     const createdComment = await addCommentUseCase.execute(useCasePayload);
-    
+
     // Assert
     expect(createdComment).toStrictEqual(new CreatedComment({
       id: 'comment-123',

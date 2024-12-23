@@ -11,10 +11,10 @@ describe('CreateReply entities', () => {
 
   it('should throw error when payload does not meet data type requirements', () => {
     // Arrange
-    const payload = { 
+    const payload = {
       owner: 'user-123',
       content: 123,
-      commentId: 'comment-123'
+      commentId: 'comment-123',
     };
 
     // Action & Assert
@@ -23,7 +23,7 @@ describe('CreateReply entities', () => {
 
   it('should create CreateReply entities correctly', () => {
     // Arrange
-    const payload = { 
+    const payload = {
       owner: 'user-123',
       content: 'sebuah balasan',
       commentId: 'comment-123',

@@ -1,4 +1,4 @@
-const CreatedComment = require("../CreatedComment");
+const CreatedComment = require('../CreatedComment');
 
 describe('a CreatedComment entities', () => {
   it('should throw error when payload not contain needed property', () => {
@@ -14,7 +14,7 @@ describe('a CreatedComment entities', () => {
 
   it('should throw error when payload does not meet data type specification', () => {
     // Arrange
-    const payload = { 
+    const payload = {
       id: 123,
       content: 'sebuah comment',
       owner: 'user-123',
@@ -24,13 +24,12 @@ describe('a CreatedComment entities', () => {
     expect(() => new CreatedComment(payload)).toThrowError('CREATED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  
   it('should create CreatedComment object correctly', () => {
     // Arrange
     const payload = {
       id: 'comment-123',
       content: 'sebuah comment',
-      owner: 'user-123', 
+      owner: 'user-123',
     };
 
     // Action

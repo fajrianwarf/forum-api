@@ -1,13 +1,12 @@
-const CommentsTableTestHelper = require("../../../../tests/CommentsTableTestHelper");
-const ThreadsTableTestHelper = require("../../../../tests/ThreadsTableTestHelper");
-const UsersTableTestHelper = require("../../../../tests/UsersTableTestHelper");
-const NotFoundError = require("../../../Commons/exceptions/NotFoundError");
+const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
+const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
+const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
+const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
 const AuthorizationError = require('../../../Commons/exceptions/AuthorizationError');
 const CreateComment = require('../../../Domains/comments/entities/CreateComment');
 const CreatedComment = require('../../../Domains/comments/entities/CreatedComment');
-const pool = require("../../database/postgres/pool");
-const CommentRepositoryPostgres = require("../CommentRepositoryPostgres");
-
+const pool = require('../../database/postgres/pool');
+const CommentRepositoryPostgres = require('../CommentRepositoryPostgres');
 
 describe('CommentRepositoryPostgres', () => {
   afterEach(async () => {
@@ -30,7 +29,7 @@ describe('CommentRepositoryPostgres', () => {
         commentRepositoryPostgres.verifyAvailableComment({
           commentId: 'comment-123',
           threadId: 'thread-123',
-        })
+        }),
       ).rejects.toThrowError(new NotFoundError('komentar tidak ditemukan'));
     });
 
@@ -95,7 +94,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, () => '');
 
       // Action & Assert
-      await expect(commentRepositoryPostgres.verifyCommentOwner({ id: commentId, owner: 'user-999'}))
+      await expect(commentRepositoryPostgres.verifyCommentOwner({ id: commentId, owner: 'user-999' }))
         .rejects.toThrowError(AuthorizationError);
     });
 
@@ -116,7 +115,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, () => '');
 
       // Action & Assert
-      await expect(commentRepositoryPostgres.verifyCommentOwner({ id: commentId, owner: userId}))
+      await expect(commentRepositoryPostgres.verifyCommentOwner({ id: commentId, owner: userId }))
         .resolves.not.toThrowError(AuthorizationError);
     });
   });
@@ -132,10 +131,10 @@ describe('CommentRepositoryPostgres', () => {
 
     it('should persist new comment', async () => {
       // Arrange
-      const newComment = new CreateComment({ 
+      const newComment = new CreateComment({
         threadId: 'thread-123',
         owner: 'user-123',
-        content: 'sebuah comment' 
+        content: 'sebuah comment',
       });
 
       const fakeIdGenerator = () => '123';
@@ -151,10 +150,10 @@ describe('CommentRepositoryPostgres', () => {
 
     it('should return added comment correctly', async () => {
       // Arrange
-      const newComment = new CreateComment({ 
+      const newComment = new CreateComment({
         threadId: 'thread-123',
         owner: 'user-123',
-        content: 'sebuah comment' 
+        content: 'sebuah comment',
       });
 
       const fakeIdGenerator = () => '123';
@@ -187,14 +186,14 @@ describe('CommentRepositoryPostgres', () => {
         id: 'comment-new',
         content: 'sebuah comment baru',
         date: '2024-12-14T00:00:00.000Z',
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-old',
         content: 'sebuah comment lama',
         date: '2024-12-12T00:00:00.000Z',
-        threadId: threadId,
+        threadId,
         owner: otherUserId,
       });
 

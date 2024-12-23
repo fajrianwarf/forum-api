@@ -9,7 +9,7 @@ class CreatedReply {
     this.owner = owner;
   }
 
-  _verifyPayload({ id, content, owner, }) {
+  _verifyPayload({ id, content, owner }) {
     if (!id || !content || !owner) {
       throw new Error('CREATED_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
     }

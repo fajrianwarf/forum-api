@@ -35,7 +35,9 @@ describe('ThreadRepositoryPostgres', () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, () => '');
 
       // Action & Asserts
-      await expect(threadRepositoryPostgres.verifyAvailableThread(threadId)).resolves.not.toThrowError(NotFoundError);
+      await expect(
+        threadRepositoryPostgres.verifyAvailableThread(threadId),
+      ).resolves.not.toThrowError(NotFoundError);
     });
   });
 
@@ -116,6 +118,6 @@ describe('ThreadRepositoryPostgres', () => {
       expect(thread.body).toStrictEqual(body);
       expect(new Date(thread.date).toISOString()).toStrictEqual(date);
       expect(thread.username).toStrictEqual(username);
-    })
+    });
   });
 });

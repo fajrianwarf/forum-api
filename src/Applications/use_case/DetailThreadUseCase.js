@@ -6,7 +6,7 @@ class DetailThreadUseCase {
   constructor({
     threadRepository,
     commentRepository,
-    replyRepository
+    replyRepository,
   }) {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
@@ -23,7 +23,7 @@ class DetailThreadUseCase {
       replies: comment.is_delete
         ? []
         : threadCommentsReplies.filter((reply) => reply.comment === comment.id)
-          .map((reply) => new DetailReply(reply))
+          .map((reply) => new DetailReply(reply)),
     }));
 
     return new DetailThread(threadDetail);

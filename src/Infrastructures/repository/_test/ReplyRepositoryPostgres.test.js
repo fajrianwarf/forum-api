@@ -42,7 +42,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -55,7 +55,7 @@ describe('ReplyRepositoryPostgres', () => {
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, () => '');
 
       // Action & Assert
-      await expect(replyRepositoryPostgres.verifyAvailableReply({ replyId: 'reply-123', commentId}))
+      await expect(replyRepositoryPostgres.verifyAvailableReply({ replyId: 'reply-123', commentId }))
         .rejects.toThrowError(new NotFoundError('balasan telah dihapus'));
     });
 
@@ -70,7 +70,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -82,7 +82,7 @@ describe('ReplyRepositoryPostgres', () => {
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, () => '');
 
       // Action & Assert
-      await expect(replyRepositoryPostgres.verifyAvailableReply({ replyId: 'reply-123', commentId: 'comment-999'}))
+      await expect(replyRepositoryPostgres.verifyAvailableReply({ replyId: 'reply-123', commentId: 'comment-999' }))
         .rejects.toThrowError(new NotFoundError('balasan dalam komentar tidak ditemukan'));
     });
 
@@ -97,7 +97,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -126,7 +126,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -138,7 +138,7 @@ describe('ReplyRepositoryPostgres', () => {
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, () => '');
 
       // Action & Assert
-      await expect(replyRepositoryPostgres.verifyReplyOwner({ id: replyId, owner: 'user-999'}))
+      await expect(replyRepositoryPostgres.verifyReplyOwner({ id: replyId, owner: 'user-999' }))
         .rejects.toThrowError(AuthorizationError);
     });
 
@@ -153,7 +153,7 @@ describe('ReplyRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       await CommentsTableTestHelper.addComment({
         id: commentId,
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await RepliesTableTestHelper.addReply({
@@ -186,7 +186,7 @@ describe('ReplyRepositoryPostgres', () => {
 
     it('should persist new reply', async () => {
       // Arrange
-      const newReply = new CreateReply({ 
+      const newReply = new CreateReply({
         owner: 'user-123',
         commentId: 'comment-123',
         content: 'sebuah balasan',
@@ -205,7 +205,7 @@ describe('ReplyRepositoryPostgres', () => {
 
     it('should return added reply correctly', async () => {
       // Arrange
-      const newReply = new CreateReply({ 
+      const newReply = new CreateReply({
         owner: 'user-123',
         commentId: 'comment-123',
         content: 'sebuah balasan',
@@ -241,7 +241,7 @@ describe('ReplyRepositoryPostgres', () => {
         id: commentId,
         content: 'sebuah comment',
         date: '2024-12-13T00:00:00.000Z',
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
 
@@ -295,14 +295,14 @@ describe('ReplyRepositoryPostgres', () => {
         id: commentId,
         content: 'sebuah comment',
         date: '2024-12-13T00:00:00.000Z',
-        threadId: threadId,
+        threadId,
         owner: userId,
       });
       await CommentsTableTestHelper.addComment({
         id: 'comment-2',
         content: 'sebuah comment',
         date: '2024-12-13T00:00:00.000Z',
-        threadId: threadId,
+        threadId,
         owner: userId,
         isDelete: true,
       });
@@ -333,7 +333,7 @@ describe('ReplyRepositoryPostgres', () => {
 
       // Action
       const replies = await replyRepositoryPostgres.getRepliesByThreadId(threadId);
-      console.log('rep :',replies)
+
       // Assert
       expect(replies).toHaveLength(2);
       expect(replies[0].id).toBe('reply-old'); // older reply first

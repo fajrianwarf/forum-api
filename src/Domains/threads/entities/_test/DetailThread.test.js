@@ -71,7 +71,7 @@ describe('a DetailThread entities', () => {
         date: '2024-11-28T14:19:09.135Z',
         username: 'kepin',
         comments: 'sebuah comment',
-      }
+      },
     ];
 
     // Action & Assert

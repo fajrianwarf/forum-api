@@ -6,15 +6,64 @@
     "jest": true
   },
   "extends": "airbnb-base",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts"
+        ]
+      }
+    }
+  },
+  "ignorePatterns": [
+    "dist",
+    "coverage",
+    "**/*.d.ts"
+  ],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+      },
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/ban-types": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "import/first": "off",
+        "import/order": "off",
+        "import/newline-after-import": "off",
+        "import/prefer-default-export": "off"
+      }
+    }
+  ],
   "rules": {
     "linebreak-style": "off",
+    "lines-between-class-members": "off",
     "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
     "no-unused-vars": "off",
     "no-console": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "import/extensions": "off"
   }
 }

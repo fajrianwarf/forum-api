@@ -2,14 +2,17 @@
   "name": "forum-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
-    "lint": "eslint ./src",
-    "start": "node src/app.js",
-    "start:dev": "nodemon src/app.js",
-    "test": "jest --setupFiles dotenv/config -i",
-    "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
-    "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint ./src ./tests --ext .ts",
+    "prestart": "npm run build",
+    "start": "node dist/app.js",
+    "start:dev": "tsx watch src/app.ts",
+    "test": "jest --config jest.config.js -i",
+    "test:watch:change": "jest --config jest.config.js --watch -i",
+    "test:watch": "jest --config jest.config.js --watchAll --coverage -i",
     "migrate": "node-pg-migrate",
     "migrate:test": "node-pg-migrate -f config/database/test.json"
   },
@@ -26,12 +29,21 @@
     "pg": "^8.6.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/hapi__hapi": "^21.0.0",
     "@types/jest": "^26.0.24",
+    "@types/node": "^20.17.30",
+    "@types/pg": "^8.15.5",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "jest": "^27.0.6",
     "node-pg-migrate": "^5.10.0",
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.9",
+    "ts-jest": "^27.1.5",
+    "tsx": "^4.19.2",
+    "typescript": "^4.9.5"
   }
 }

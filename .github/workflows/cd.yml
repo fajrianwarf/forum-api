@@ -20,6 +20,7 @@ jobs:
         script: |
           cd ~/forum-api
           git pull origin main
-          npm install
+          npm ci
+          npm run build
           npm run migrate up
-          pm2 restart forum-api
+          pm2 restart forum-api --update-env

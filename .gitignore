@@ -4,3 +4,4 @@ config/database/test.json
 coverage
 .env
 dist
+AGENTS.md
